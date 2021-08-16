@@ -1,6 +1,5 @@
 @import 'config';
 @import 'menu';
-@import 'mobile';
 
 *{
     box-sizing: border-box;
@@ -9,7 +8,7 @@
 body{
     @include background;
     background: $primary-color;
-    color:white;
+    color: set-text-color($primary-color);
     height: 100vh;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,14 +20,14 @@ h1,h2 {
     margin: 0;
     font-weight: 400;
 
-    &.home_lg--heading{
+    &.lg_heading{
         font-size: 6rem;
     }
 
-    &.home_sm--heading{
+    &.sm_heading{
         margin-bottom: 2rem;
         padding: 0.2rem 1rem;
-        background: rgba(lighten($primary-color, 3), 0.5);
+        background: rgba(lighten($primary-color, 3), 0.3);
     }
 }
 
@@ -44,13 +43,14 @@ header{
     width: 100%;
 }
 
-.home_text--secondary{
+.text--secondary{
     color: $secondary-color;
 }
 
 main{
     padding: 4rem;
-    height: 100%;
+    //Sticky Footer//
+    min-height: calc(100vh - 60px);
 
     .home_icons{
         margin-top: 1rem;
@@ -73,3 +73,54 @@ main{
         }
     }
 }
+
+
+//GRID TEMPLETES DISPLAY//
+.about_info{
+    display: grid;
+    grid-gap: 30px;
+    grid-template-areas: 
+    'bioImage bio bio'
+    'job1 job2 job3';
+    grid-template-columns: repeat(3, 1fr);
+
+    .about_info--image{
+        grid-area: bioImage;
+        width: 225px;
+        margin: auto;
+        border-radius: 50%;
+        border: $secondary-color 3px solid;
+    }
+    
+    .about_info--bio{
+        grid-area: bio;
+        font-size: 1.5rem;
+    }
+    
+    .job_1{
+        grid-area: job1;
+    }
+    .job_2{
+        grid-area: job2;
+    }
+    .job_3{
+        grid-area: job3;
+    }
+    
+    .about_info--job{
+        background: lighten($primary-color, 5);
+        padding: 0.5rem;
+        border-bottom: $secondary-color 5px solid;
+    }
+}
+
+#main_footer{
+    text-align: center;
+    padding: 1rem;
+    background: darken($primary-color, 10);
+    color: set-text-color($primary-color);
+    height: 60px;
+    bottom: 0;
+}
+
+@import 'mobile';
