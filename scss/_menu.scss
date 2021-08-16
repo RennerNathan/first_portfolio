@@ -18,8 +18,7 @@
 
     //Rotate Into X-Transition
     &.close{
-        //transform: rotate(180deg);
-
+        transform: rotate(90deg);
         .menu_btn--line{
 
             &:nth-child(1){
@@ -34,8 +33,98 @@
             }
         }
     }
+}
+
+//Menu Overlay//
+.menu{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    visibility: hidden;
+
+    &.show{
+        visibility: visible;
+    }
+
+    &_branding,
+    &_nav{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        width: 50%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &_nav{
+        margin: 0;
+        padding: 0;
+        background: rgba(darken($primary-color, 8),0.9);
+        list-style: none;
+        transform: translate3d(0, -100%, 0);
+        @include easeOut;
+
+        &.show{
+            transform: translate3d(0,0,0);
+        }
+    }
+
+    &_branding{
+        background: rgba($primary-color,0.9);
+        @include easeOut;
+        transform: translate3d(0,100%,0);
+
+        &.show{
+            transform: translate3d(0,0,0);
+        }
+        //FIX THE PORTRAIT PICTURE LATER//
+        .menu_branding--portrait{ 
+            width: 250px;
+            height: 250px;
+            background: url('../img/portrait.jpg');
+            background-size: cover;
+            border-radius: 50%;
+            border: solid 3px $secondary-color;
+        }
+    }
+
+    .menu_nav_item{
+        transform: translate3d(600px, 0, 0);
+        @include easeOut;
+
+        &.show{
+            transform: translate3d(0,0,0);
+        }
+
+        &.current > a{
+            color: $secondary-color;
+        }
+    }
+
+    .menu_nav_item--link{
+        display: inline-block;
+        position: relative;
+        font-size: 30px;
+        text-transform: uppercase;
+        padding: 1rem 0;
+        color: #fff;
+        font-weight: 300;
+        text-decoration: none;
+        @include easeOut;
+        
+        &:hover{
+            color: $secondary-color;
+        }
+    }
+}
 
 
 
-
+//DELAY EACH NAV ITEM SLIDE USING SASS FORLOOP//
+@for $x from 1 through 4{
+    .menu_nav_item:nth-child(#{$x}) {
+        transition-delay: $x *0.1s;
+    }
 }
